@@ -4,18 +4,19 @@ import Counter from "./counter";
 const Home = () => {
 	const [count, setCount] = useState(0);
 
-	setInterval(() => {
-		setCount(count + 1);
-		console.log(count)
-	}, 1000);
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCount((prevCount) => prevCount + 1);
+		}, 1000);
 
-
+	
+		return () => clearInterval(interval);
+	}, []);
 
 	return (
 		<div>
-			<Counter count={count}/>
+			<Counter count={count} />
 		</div>
-		
 	);
 };
 
